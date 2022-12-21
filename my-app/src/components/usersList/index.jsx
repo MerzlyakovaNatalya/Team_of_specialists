@@ -4,29 +4,20 @@ import style from './UserList.module.scss'
 import axios from 'axios'
 import { Loader } from '../loader'
 import { Error } from '../error'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUsers } from '../../store/users/actions'
+import { getUsersData, getError, getLoading } from '../../store/users/selectors'
+import { UserCard } from '../userСard'
 
 export const UserList = () => {
 
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  async function getUser() {
-    
-    setLoading(true);
-    setError(false);
-
-    try {
-      const response = await axios.get('https://reqres.in/api/users?page=2');
-      console.log(response);
-      setLoading(false);
-    } catch (error) {
-        setError(true);
-      console.error(error);
-    }
-  }
+  const users = useSelector(getUsersData);
+  const error = useSelector(getError);
+  const loading = useSelector(getLoading);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getUser();
+    dispatch(getUsers)
   }, [])
 
   return (
@@ -34,6 +25,9 @@ export const UserList = () => {
       {error && <Error />}
       {loading && <Loader />}
       <h1>UserList</h1>
+      {users.map((item) => (
+        <UserCard key={item.id} {...item}/>
+      ))}
     </div>
   )
 }
