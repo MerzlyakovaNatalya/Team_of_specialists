@@ -1,0 +1,47 @@
+$fontFamily: "Roboto";
+$width: 1440px;
+
+.wrap {
+  max-width: $width;
+  background: #ffffff;
+  margin: 0 auto;
+  .header {
+    max-width: $width;
+    background: #512689;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .button {
+    margin: 40px 90% 2px;
+    padding: 8px 16px;
+    gap: 8px;
+    width: 81px;
+    height: 38px;
+    border: 1px solid #f8f8f8;
+    border-radius: 8px;
+    color: #F8F8F8;
+    background: #512689;
+  }
+  .title {
+    font-family: $fontFamily;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 75px;
+    color: #ffffff;
+  }
+  .text {
+    width: 846px;
+    height: 46px;
+    margin: 0 auto;
+    font-family: $fontFamily;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+    color: #f8f8f8;
+    margin-bottom: 64px;
+  }
+}
