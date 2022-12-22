@@ -3,12 +3,16 @@ import {
     SET_LOADING,
     SET_USERS,
     RESET,
+    ADD_USER,
+    SET_ISAUTH
   } from "./actions";
 
   const initialState = {
     isError: false,
     isLoading: false,
     users: [],
+    user: {},
+    isAuth: false
   };
 
   export const usersReducer = (state = initialState, action) => {
@@ -23,6 +27,14 @@ import {
   
       case SET_USERS: {
         return { ...state, users: action.payload };
+      }
+
+      case SET_ISAUTH: {
+        return { ...state, isAuth: action.payload };
+      }
+
+      case ADD_USER: {
+        return { ...state, user: action.payload };
       }
   
       case RESET: {

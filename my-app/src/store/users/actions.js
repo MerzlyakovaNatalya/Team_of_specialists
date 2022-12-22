@@ -3,6 +3,8 @@ import axios from "axios";
 export const SET_USERS = "SET_USERS";
 export const SET_ERROR = "SET_ERROR";
 export const SET_LOADING = "SET_LOADING";
+export const SET_ISAUTH = "SET_ISAUTH";
+export const ADD_USER = "ADD_USER";
 export const RESET = "RESET";
 
 
@@ -21,18 +23,42 @@ export const setLoading = (status) => ({
     payload: status,
   });
 
+  export const setIsAuth = (status) => ({
+    type: SET_ISAUTH,
+    payload: status,
+  });
+
+export const addUser = (user) => ({
+    type: ADD_USER,
+    payload: user,
+  });
+
   export const getUsers = async (dispatch) => {
     dispatch(setLoading(true));
     dispatch(setError(false));
 
     try {
       const response = await axios.get('https://reqres.in/api/users?page=2');
-      console.log(response.data.data);
       dispatch(setUsers(response.data.data));
     } catch (error) {
         dispatch(setError(true));
       console.error(error);
     }
     dispatch(setLoading(false));
+  }
+
+  export const getRegisteredUser = (email, password) => async (dispatch) => {
+    email = "eve.holt@reqres.in";
+    password = "pistol";
+    try {
+      const response = await axios.post('https://reqres.in/api/register',{
+        email: email,
+        password: password
+    })
+      dispatch(addUser(response.data));
+    } catch (error) {
+      console.error(error);
+    }
+
   }
 
