@@ -1,21 +1,21 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import style from './UserList.module.scss'
 import { Loader } from '../loader'
 import { Error } from '../error'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUsers } from '../../store/users/actions'
-import { getUsersData, getError, getLoading } from '../../store/users/selectors'
+import { getUsersData, getError, getLoading, getIsAuth } from '../../store/users/selectors'
 import { UserCard } from '../userСard'
 import { Modal } from '../modal'
 import { Register } from '../register'
 
 export const UserList = () => {
 
+  const isAuth = useSelector(getIsAuth);
   const users = useSelector(getUsersData);
   const error = useSelector(getError);
   const loading = useSelector(getLoading);
-  const [isAuth, setIsAuth] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
