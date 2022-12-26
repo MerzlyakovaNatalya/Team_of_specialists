@@ -35,6 +35,7 @@ export const Register = () => {
             className={style.input}
             value={valueName}
             onChange={onChangeName}
+            name="name_user"
           />
           <p className={style.text}>Электронная почта</p>
           <input
