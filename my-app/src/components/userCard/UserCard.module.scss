@@ -2,6 +2,7 @@ $fontFamily: "Roboto";
 $width: 1440px;
 
 .wrap {
+  font-family: $fontFamily;
   max-width: $width;
   height: 265px;
   background: #ffffff;
@@ -36,7 +37,7 @@ $width: 1440px;
         color: #f8f8f8;
         background: #512689;
         @media screen and (max-width: 525px) {
-          background-image: url("../../image/exit.png");
+          background-image: url("../../image/check.png");
           background-repeat: no-repeat;
           border: 0;
           color: #512689;
@@ -48,6 +49,8 @@ $width: 1440px;
         margin: 32px 96px 0 0;
         @media screen and (max-width: 525px) {
           margin: 25px 3px 0 0;
+          background-image: url("../../image/exit.png");
+          width: 45px;
         }
       }
     }
@@ -72,16 +75,21 @@ $width: 1440px;
     }
     .wrap_name {
       font-family: $fontFamily;
+      font-style: normal;
       display: flex;
       flex-direction: column;
       color: #ffffff;
       .title {
+        font-family: $fontFamily;
         font-style: normal;
         font-weight: 400;
         font-size: 64px;
         line-height: 75px;
         margin: 68px 0 16px 32px;
         @media screen and (max-width: 525px) {
+          font-family: $fontFamily;
+          font-style: normal;
+          font-weight: 400;
           font-size: 36px;
           line-height: 42px;
           margin: 0 auto;
