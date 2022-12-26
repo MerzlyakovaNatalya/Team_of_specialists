@@ -1,43 +1,42 @@
 import React from 'react'
-import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import style from './UserList.module.scss'
 import { Loader } from '../loader'
 import { Error } from '../error'
-import { useDispatch, useSelector } from 'react-redux'
-import { getUsers } from '../../store/users/actions'
-import { getUsersData, getError, getLoading, getIsAuth } from '../../store/users/selectors'
-import { UserCard } from '../userСard'
+import { UsersCard } from '../usersСard'
 import { Modal } from '../modal'
 import { Register } from '../register'
+import { useUsersList } from '../../hooks/useUsersList'
 
 export const UserList = () => {
-
-  const isAuth = useSelector(getIsAuth);
-  const users = useSelector(getUsersData);
-  const error = useSelector(getError);
-  const loading = useSelector(getLoading);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getUsers)
-  }, [])
-
+  const [loading, error, users, isAuth, getExit] = useUsersList()
   return (
     <div className={style.wrap}>
       <div className={style.header}>
-       <button className={style.button}>Выход</button>
-       <h1 className={style.title}>Наша команда</h1>
-       <p className={style.text}>Это опытные специалисты, хорошо разбирающиеся во всех задачах, которые ложатся на их плечи, и умеющие находить выход из любых, даже самых сложных ситуаций. </p>
+        <button className={style.button} onClick={getExit}>
+          Выход
+        </button>
+        <h1 className={style.title}>Наша команда</h1>
+        <p className={style.text}>
+          Это опытные специалисты, хорошо разбирающиеся во всех задачах, которые
+          ложатся на их плечи, и умеющие находить выход из любых, даже самых
+          сложных ситуаций.{' '}
+        </p>
       </div>
       {error && <Error />}
       {loading && <Loader />}
-      <h1>UserList</h1>
-      {users.map((item) => (
-        <UserCard key={item.id} {...item}/>
-      ))}
-      {isAuth && <Modal>
-          <Register/>
-        </Modal>}
+      <div className={style.content}>
+        {users.map((item) => (
+          <Link to={`/${item.id}`} className={style.link} key={item.id}>
+            <UsersCard {...item} />
+          </Link>
+        ))}
+      </div>
+      {isAuth && (
+        <Modal>
+          <Register />
+        </Modal>
+      )}
     </div>
   )
 }

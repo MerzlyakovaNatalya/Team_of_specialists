@@ -5,7 +5,8 @@ export const SET_ERROR = "SET_ERROR";
 export const SET_LOADING = "SET_LOADING";
 export const SET_ISAUTH = "SET_ISAUTH";
 export const ADD_USER = "ADD_USER";
-export const RESET = "RESET";
+export const RESET_USER= "RESET_USER";
+export const ADD_LIKE= "ADD_LIKE";
 
 
 export const setUsers = (users) => ({
@@ -33,13 +34,29 @@ export const addUser = (user) => ({
     payload: user,
   });
 
+  export const reset = () => ({
+    type: RESET_USER,
+  });
+
+  export const addLike = (userId, status) => ({
+    type: ADD_LIKE,
+    payload: {
+      userId, 
+      status
+  },
+  });
+
   export const getUsers = async (dispatch) => {
     dispatch(setLoading(true));
     dispatch(setError(false));
 
     try {
       const response = await axios.get('https://reqres.in/api/users?page=2');
-      dispatch(setUsers(response.data.data));
+      const copyResponse = response.data.data;
+      const editedeRsponse = copyResponse.map((item) => {
+        return {...item, like: false}
+      });
+      dispatch(setUsers(editedeRsponse));
     } catch (error) {
         dispatch(setError(true));
       console.error(error);
@@ -55,10 +72,11 @@ export const addUser = (user) => ({
         email: email,
         password: password
     })
+      localStorage.setItem('token_auth', response.data.token)
       dispatch(addUser(response.data));
     } catch (error) {
       console.error(error);
     }
-
+      
   }
 
