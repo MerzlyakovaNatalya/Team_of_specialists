@@ -7,7 +7,7 @@ import { useUserCard } from '../../hooks/useUserCard'
 
 export const UserCard = () => {
   const { userId } = useParams()
-  const [user, harkBack, getExit] = useUserCard(userId)
+  const [userFromStorage, harkBack, getExit] = useUserCard(userId)
 
   return (
     <div className={style.wrap}>
@@ -22,13 +22,13 @@ export const UserCard = () => {
         </div>
         <div className={style.wrap_user}>
           <img
-            src={user.avatar}
+            src={userFromStorage.avatar}
             alt="avatar"
             className={style.img_avatar}
           ></img>
           <div className={style.wrap_name}>
             <h1 className={style.title}>
-              {user.first_name} {user.last_name}
+              {userFromStorage.first_name} {userFromStorage.last_name}
             </h1>
             <p className={style.text}>Партнер</p>
           </div>
@@ -69,10 +69,10 @@ export const UserCard = () => {
           </p>
           <p>
             <img src={email} alt="email" className={style.img_contacts}></img>
-            <strong>{user.email}</strong>
+            <strong>{userFromStorage.email}</strong>
           </p>
         </div>
-      </div>
+  </div>
     </div>
   )
 }
