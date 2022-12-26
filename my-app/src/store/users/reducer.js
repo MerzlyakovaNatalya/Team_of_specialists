@@ -2,9 +2,10 @@ import {
     SET_ERROR,
     SET_LOADING,
     SET_USERS,
-    RESET,
     ADD_USER,
-    SET_ISAUTH
+    SET_ISAUTH,
+    RESET_USER,
+    ADD_LIKE
   } from "./actions";
 
   const initialState = {
@@ -12,7 +13,8 @@ import {
     isLoading: false,
     users: [],
     user: {},
-    isAuth: false
+    isAuth: true, 
+    like: false
   };
 
   export const usersReducer = (state = initialState, action) => {
@@ -36,9 +38,31 @@ import {
       case ADD_USER: {
         return { ...state, user: action.payload };
       }
-  
-      case RESET: {
-        return state; //Always return the initial state
+
+      case RESET_USER: {
+        return { ...state, user: {} };
+      }
+
+      case ADD_LIKE: {
+       // return { ...state, like: action.payload };
+       const prevUser = state.users;
+
+          const targetIndex = prevUser.findIndex((item) => item.id === action.payload.userId)
+
+          if(targetIndex === -1) {
+            return state;
+          }
+
+          const copyUsers = [...state.users]
+          copyUsers[targetIndex] = {
+            ...copyUsers[targetIndex],
+            like: action.payload.status,
+          }
+
+          return {
+            ...state,
+            users: copyUsers
+          }
       }
   
       default: {
