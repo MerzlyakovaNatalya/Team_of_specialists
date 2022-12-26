@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import style from './UserList.module.scss'
+import { Link } from 'react-router-dom'
 import { Loader } from '../loader'
 import { Error } from '../error'
 import { UsersCard } from '../usersСard'
