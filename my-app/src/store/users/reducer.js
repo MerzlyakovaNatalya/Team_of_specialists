@@ -5,7 +5,8 @@ import {
     ADD_USER,
     SET_ISAUTH,
     RESET_USER,
-    ADD_LIKE
+    ADD_LIKE,
+    RESET_USERS
   } from "./actions";
 
   const initialState = {
@@ -13,8 +14,7 @@ import {
     isLoading: false,
     users: [],
     user: {},
-    isAuth: true, 
-    like: false
+    isAuth: false, 
   };
 
   export const usersReducer = (state = initialState, action) => {
@@ -28,7 +28,7 @@ import {
       }
   
       case SET_USERS: {
-        return { ...state, users: action.payload };
+        return { ...state, users: [...action.payload] };
       }
 
       case SET_ISAUTH: {
@@ -43,8 +43,11 @@ import {
         return { ...state, user: {} };
       }
 
+      case RESET_USERS: {
+        return { ...state, users: [] };
+      }
+
       case ADD_LIKE: {
-       // return { ...state, like: action.payload };
        const prevUser = state.users;
 
           const targetIndex = prevUser.findIndex((item) => item.id === action.payload.userId)

@@ -105,6 +105,38 @@ $width: 1440px;
     @media screen and (max-width: 525px) {
       margin-top: 32px;
     }
+    .wrapButton {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      .addUsers {
+        font-family: $fontFamily;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 136.19%;
+        box-sizing: border-box;
+        padding: 8px 16px;
+        gap: 8px;
+        width: 170px;
+        height: 40px;
+        border: 1px solid #151317;
+        border-radius: 8px;
+        color: #151317;
+        margin-top: 56px;
+        margin-bottom: 69px;
+        background-color: white;
+        &::after {
+          content: url("../../image/img_button_add.svg");
+          margin-left: 11px;
+        }
+        @media screen and (max-width: 525px) {
+          width: 170px;
+          height: 40px;
+          margin-top: 32px;
+          margin-bottom: 32px;
+        }
+      }
+    }
   }
   .link {
     text-decoration: none;

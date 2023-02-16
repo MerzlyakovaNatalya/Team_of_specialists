@@ -10,7 +10,9 @@ export const UsersCard = (props) => {
 
   return (
     <div className={style.wrap}>
-      <img src={avatar} alt="photo" className={style.img_avatar} />
+      <div style={{ width: "124px", height: "124px"}}>
+      <img src={avatar} alt="photo" className={style.img_avatar}/>
+      </div>
       <p className={style.text}>
         {first_name} {last_name}{' '}
       </p>
