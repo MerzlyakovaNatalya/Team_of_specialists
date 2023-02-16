@@ -6,6 +6,7 @@ import { getRegisteredUser, setIsAuth } from "../../store/users/actions";
 export const useFormValidation = () => {
   const [emailDirty, setEmailDirty] = useState(false); //отображает были ли внутри input или нет
   const [passwordDirty, setPasswordDirty] = useState(false);
+  const [namedDirty, setNameDirty] = useState(false);
   const [copyPasswordDirty, setCopyPasswordDirty] = useState(false);
   const [emailError, setEmailError] = useState("Email не может быть пустым");
   const [passwordError, setPasswordError] = useState("Пароль не может быть пустым");
@@ -85,6 +86,9 @@ export const useFormValidation = () => {
 
   const blurHandler = (e) => {
     switch (e.target.name) {
+      case "user":
+        setNameDirty(true);
+        break;
       case "email":
         setEmailDirty(true);
         break;
@@ -107,6 +111,7 @@ export const useFormValidation = () => {
     onChangePassword,
     onChangeCopyPassword,
     onSend,
+    namedDirty,
     emailDirty,
     passwordDirty,
     copyPasswordDirty,
