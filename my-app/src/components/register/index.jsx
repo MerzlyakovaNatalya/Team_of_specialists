@@ -29,7 +29,7 @@ export const Register = () => {
       <div className={style.content}>
         <div className={style.wrapper}>
           <h2 className={style.title}>Регистрация</h2>
-          <form onSubmit={(event) => onSend(event)}>
+          <form onSubmit={(event) => onSend(event)} onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}>
             <div className={style.form}>
             <p className={style.text}>Имя</p>
             <input
@@ -42,7 +42,7 @@ export const Register = () => {
             <p className={style.text}>Электронная почта</p>
             <input
               type="text"
-              className={style.input}
+              className={emailDirty && emailError ? style.input_err : style.input}
               value={valueMail}
               onChange={onChangeMail}
               name="email"
@@ -62,7 +62,7 @@ export const Register = () => {
                 name="password"
                 onBlur={(e) => blurHandler(e)}
               />
-              <button className={style.button_password}>
+              <button className={style.button_password} onClick={(e) => e.preventDefault()}>
                 <img src={look} alt="" />
               </button>
             </div>
@@ -80,7 +80,7 @@ export const Register = () => {
                 name="copyPassword"
                 onBlur={(e) => blurHandler(e)}
               />
-              <button className={style.button_password}>
+              <button className={style.button_password} type="button" onClick={(e) => e.preventDefault()}>
                 <img src={look} alt="" />
               </button>
             </div>
@@ -88,7 +88,6 @@ export const Register = () => {
               <div style={{ color: 'red' }}>{copyPasswordError}</div>
             )}
             </div>
-            {/* </div> */}
             <button
               className={formValid ? style.button : style.no_button}
               type="submit"
