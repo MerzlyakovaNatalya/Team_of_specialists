@@ -9,12 +9,22 @@ import { Register } from '../register'
 import { useUsersList } from '../../hooks/useUsersList'
 
 export const UserList = () => {
-  const [loading, error, users, isAuth, getExit] = useUsersList()
+  const [
+    loading,
+    error,
+    users,
+    isAuth,
+    isModel,
+    isAllUsers,
+    getCountUsers,
+    getLoginOrExit,
+  ] = useUsersList()
+
   return (
     <div className={style.wrap}>
       <div className={style.header}>
-        <button className={style.button} onClick={getExit}>
-          Выход
+        <button className={style.button} onClick={getLoginOrExit}>
+          {isAuth ? 'Выход' : 'Вход'}
         </button>
         <h1 className={style.title}>Наша команда</h1>
         <p className={style.text}>
@@ -26,13 +36,37 @@ export const UserList = () => {
       {error && <Error />}
       {loading && <Loader />}
       <div className={style.content}>
-        {users.map((item) => (
-          <Link to={`/${item.id}`} className={style.link} key={item.id}>
-            <UsersCard {...item} />
-          </Link>
-        ))}
+        {isAuth ? (
+          <>
+            {users
+              .filter((i, index) => index < 8)
+              .map((item) => (
+                <Link to={`/${item.id}`} className={style.link} key={item.id}>
+                  <UsersCard {...item} />
+                </Link>
+              ))}
+            {isAllUsers &&
+              users
+                .filter((i, index) => index > 8)
+                .map((item) => (
+                  <Link to={`/${item.id}`} className={style.link} key={item.id}>
+                    <UsersCard {...item} />
+                  </Link>
+                ))}
+            <div className={style.wrapButton}>
+              <button className={style.addUsers} onClick={getCountUsers}>
+                Показать еще
+              </button>
+            </div>
+          </>
+        ) : (
+          <p>
+            Список пользователей доступен только для зарегистрированных
+            пользователей.
+          </p>
+        )}
       </div>
-      {isAuth && (
+      {isModel && (
         <Modal>
           <Register />
         </Modal>

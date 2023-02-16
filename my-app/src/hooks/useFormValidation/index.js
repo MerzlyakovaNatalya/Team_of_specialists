@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { setModel } from "../../store/isModel/actions";
 import { getRegisteredUser, setIsAuth } from "../../store/users/actions";
 
 export const useFormValidation = () => {
@@ -17,12 +18,21 @@ export const useFormValidation = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if ((emailError, passwordError, copyPasswordError)) {
+    if ((emailError || passwordError || copyPasswordError)) {
       setFormValid(false);
     } else {
       setFormValid(true);
     }
   }, [emailError, passwordError, copyPasswordError]);
+
+  useEffect(() => {
+    if (valuePassword !== valueCopyPassword) {
+      setCopyPasswordError("Пароль не совпадает");
+    }else {
+      setFormValid(true);
+      setCopyPasswordError("");
+    }
+  }, [valuePassword, valueCopyPassword])
 
   const onChangeName = (event) => {
     event.preventDefault();
@@ -69,7 +79,8 @@ export const useFormValidation = () => {
   const onSend = (event) => {
     event.preventDefault();
     dispatch(getRegisteredUser(valueMail, valuePassword));
-    dispatch(setIsAuth(false));
+    dispatch(setIsAuth(true));
+    dispatch(setModel(false));
   };
 
   const blurHandler = (e) => {

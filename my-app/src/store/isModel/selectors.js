@@ -1,0 +1,1 @@
+export const getIsModel = (state) => state.isModel.isModel;
