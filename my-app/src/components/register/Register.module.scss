@@ -49,6 +49,7 @@ $width: 1440px;
       .form {
         display: flex;
         flex-direction: column;
+        position: relative;
         @media screen and (max-width: 525px) {
           gap: 16px;
           width: 343px;
@@ -85,14 +86,9 @@ $width: 1440px;
         .wrap_input_password {
           position: relative;
           @media screen and (max-width: 525px) {
-            padding: 8px 5px 8px 1px;
             gap: 8px;
             width: 99%;
             height: 48px;
-            // .input {
-            //   width: 300px;
-            //   height: 20px;
-            // }
           }
         }
         .button_password {
@@ -101,9 +97,6 @@ $width: 1440px;
           right: 3%;
           border: 0;
           background: #f8f8f8;
-          @media screen and (max-width: 525px) {
-            right: 11%;
-          }
         }
       }
     }
