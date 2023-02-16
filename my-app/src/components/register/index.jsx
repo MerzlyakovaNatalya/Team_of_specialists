@@ -14,6 +14,7 @@ export const Register = () => {
     onChangePassword,
     onChangeCopyPassword,
     onSend,
+    namedDirty,
     emailDirty,
     passwordDirty,
     copyPasswordDirty,
@@ -37,7 +38,10 @@ export const Register = () => {
               className={style.input}
               value={valueName}
               onChange={onChangeName}
-              name="name_user"
+              name="user"
+              autoComplete="off" 
+              role="presentation"
+              onBlur={(e) => blurHandler(e)}
             />
             <p className={style.text}>Электронная почта</p>
             <input
@@ -46,6 +50,8 @@ export const Register = () => {
               value={valueMail}
               onChange={onChangeMail}
               name="email"
+              autoComplete="off" 
+              role="presentation"
               onBlur={(e) => blurHandler(e)}
             />
             {emailDirty && emailError && (
