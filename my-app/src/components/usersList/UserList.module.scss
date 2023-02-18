@@ -24,9 +24,8 @@ $width: 1440px;
     @media screen and (max-width: 525px) {
       width: 375px;
       background: #512689;
-      flex: none;
-      order: 0;
-      flex-grow: 0;
+      margin: 0;
+      padding: 0;
     }
   }
   .button {
