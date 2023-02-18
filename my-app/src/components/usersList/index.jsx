@@ -60,7 +60,7 @@ export const UserList = () => {
             </div>
           </>
         ) : (
-          <p>
+          <p className={style.text} style={{ color: "#44014C"}}>
             Список пользователей доступен только для зарегистрированных
             пользователей.
           </p>
